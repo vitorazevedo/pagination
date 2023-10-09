@@ -10,19 +10,17 @@ export class AppComponent implements OnInit {
   size = 3;
   pages = this.paginate(this.arr, this.size);
 
-  private paginate(arr: number[], size: number) {
-    return arr.reduce((acc: any, cur: number, i: number) => {
-      let idx = Math.floor(i / size);
-      let page = acc[idx] || (acc[idx] = []);
+  ngOnInit() {
+    console.log(this.pages);
+    console.log(this.pages[1]);
+  }
+
+  private paginate(arr: number[], size: number): number[][] {
+    return arr.reduce<number[][]>((acc, cur, i) => {
+      const idx = Math.floor(i / size);
+      const page = acc[idx] || (acc[idx] = []);
       page.push(cur);
       return acc;
     }, []);
-  }
-
-  ngOnInit() {
-    console.log('Hello');
-
-    console.log(this.pages);
-    console.log(this.pages[1]);
   }
 }
